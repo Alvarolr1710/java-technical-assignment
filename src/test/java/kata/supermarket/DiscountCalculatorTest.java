@@ -30,6 +30,8 @@ class DiscountCalculatorTest {
         return Stream.of(
                 noItems(),
                 aSingleItemPricedPerUnit(),
+                multipleItemsOfTheSamePricedPerUnit(),
+                multipleItemsOfTheSamePricedPerUnitWithDiscount(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
                 aSingleItemPricedByWeightWithDiscount(),
@@ -38,18 +40,18 @@ class DiscountCalculatorTest {
     }
 
     private static Arguments aSingleItemPricedByWeight() {
-        return Arguments.of("a single weighed item", "0.00",
+        return Arguments.of("a single weighed item discount", "0.00",
                 Collections.singleton(americanSweetsByWeight(new BigDecimal(".25"), DiscountEnum.NONE)));
     }
 
     private static Arguments aSingleItemPricedByWeightWithDiscount() {
-        return Arguments.of("a single weighed item", "2.49",
+        return Arguments.of("a single weighed item discount", "2.49",
                 Collections.singleton(
                         americanSweetsByWeight(new BigDecimal("1.25"), DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE)));
     }
 
     private static Arguments multipleItemsPricedByWeight() {
-        return Arguments.of("multiple weighed items", "0.00",
+        return Arguments.of("multiple weighed items discount", "0.00",
                 Arrays.asList(
                         americanSweetsByWeight(new BigDecimal(".25"), DiscountEnum.NONE),
                         twoHundredGramsOfPickAndMix())
@@ -57,24 +59,38 @@ class DiscountCalculatorTest {
     }
 
     private static Arguments multipleItemsPricedPerUnit() {
-        return Arguments.of("multiple items priced per unit", "0.00",
-                Arrays.asList(aPackOfDigestives(), aPintOfMilk()));
+        return Arguments.of("multiple items discounted", "0.00",
+                Arrays.asList(aPackOfDigestives(), pintsOfMilk(1, DiscountEnum.NONE)));
     }
 
     private static Arguments aSingleItemPricedPerUnit() {
-        return Arguments.of("a single item priced per unit", "0.00", Collections.singleton(aPintOfMilk()));
+        return Arguments.of(
+                "a single item discount", "0.00",
+                Collections.singleton(pintsOfMilk(1, DiscountEnum.NONE)));
+    }
+
+    private static Arguments multipleItemsOfTheSamePricedPerUnit() {
+        return Arguments.of(
+                "multiple items of the same discount", "0.00",
+                Collections.singleton(pintsOfMilk(3, DiscountEnum.NONE)));
+    }
+
+    private static Arguments multipleItemsOfTheSamePricedPerUnitWithDiscount() {
+        return Arguments.of(
+                "multiple items of the same discount", "0.49",
+                Collections.singleton(pintsOfMilk(3, DiscountEnum.BUY_ONE_GET_ONE)));
     }
 
     private static Arguments noItems() {
         return Arguments.of("no items", "0.00", Collections.emptyList());
     }
 
-    private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49"), DiscountEnum.NONE).oneOf();
+    private static Item pintsOfMilk(int unitCount, DiscountEnum discountEnum) {
+        return new Product(new BigDecimal("0.49"), discountEnum, unitCount).getItem();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55"), DiscountEnum.NONE).oneOf();
+        return new Product(new BigDecimal("1.55"), DiscountEnum.NONE, 1).getItem();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets(DiscountEnum discountEnum) {

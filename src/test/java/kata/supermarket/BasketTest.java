@@ -28,6 +28,8 @@ class BasketTest {
                 noItems(),
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
+                multipleItemOfTheSamePriced(),
+                multipleItemOfTheSamePricedWithDiscount(),
                 aSingleItemPricedByWeight(),
                 aSingleItemPricedByWeightWithDiscount(),
                 multipleItemsPricedByWeight()
@@ -55,23 +57,34 @@ class BasketTest {
 
     private static Arguments multipleItemsPricedPerUnit() {
         return Arguments.of("multiple items priced per unit", "2.04",
-                Arrays.asList(aPackOfDigestives(), aPintOfMilk()));
+                Arrays.asList(aPackOfDigestives(), pintsOfMilk(1, DiscountEnum.NONE)));
     }
 
     private static Arguments aSingleItemPricedPerUnit() {
-        return Arguments.of("a single item priced per unit", "0.49", Collections.singleton(aPintOfMilk()));
+        return Arguments.of("a single item priced per unit", "0.49",
+                Collections.singleton(pintsOfMilk(1, DiscountEnum.NONE)));
+    }
+
+    private static Arguments multipleItemOfTheSamePriced() {
+        return Arguments.of("a single item priced per unit", "1.47",
+                Collections.singleton(pintsOfMilk(3, DiscountEnum.NONE)));
+    }
+
+    private static Arguments multipleItemOfTheSamePricedWithDiscount() {
+        return Arguments.of("a single item priced per unit", "0.98",
+                Collections.singleton(pintsOfMilk(3, DiscountEnum.BUY_ONE_GET_ONE)));
     }
 
     private static Arguments noItems() {
         return Arguments.of("no items", "0.00", Collections.emptyList());
     }
 
-    private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49"), DiscountEnum.NONE).oneOf();
+    private static Item pintsOfMilk(int unitCount, DiscountEnum discountEnum) {
+        return new Product(new BigDecimal("0.49"), discountEnum, unitCount).getItem();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55"), DiscountEnum.NONE).oneOf();
+        return new Product(new BigDecimal("1.55"), DiscountEnum.NONE, 1).getItem();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets(DiscountEnum discountEnum) {
