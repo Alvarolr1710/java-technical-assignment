@@ -6,10 +6,16 @@ public class WeighedProduct {
 
     private final BigDecimal pricePerKilo;
 
-    public WeighedProduct(final BigDecimal pricePerKilo) {
+    private final DiscountEnum discount;
+
+    public WeighedProduct(final BigDecimal pricePerKilo, DiscountEnum discount) {
         this.pricePerKilo = pricePerKilo;
+        this.discount = discount;
     }
 
+    public DiscountEnum getDiscount() {
+        return discount;
+    }
     BigDecimal pricePerKilo() {
         return pricePerKilo;
     }

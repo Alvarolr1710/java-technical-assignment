@@ -45,13 +45,14 @@ public class Basket {
          *  It is not likely to be the best place to do those calculations.
          *  Think about how Basket could interact with something
          *  which provides that functionality.
+         * <p>
+         * private BigDecimal discounts() {
+         * return BigDecimal.ZERO;
+         * }
          */
-        private BigDecimal discounts() {
-            return BigDecimal.ZERO;
-        }
 
         private BigDecimal calculate() {
-            return subtotal().subtract(discounts());
+            return subtotal().subtract(new DiscountCalculator(this.items).calculateDiscount());
         }
     }
 }

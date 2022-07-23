@@ -29,17 +29,27 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
+                aSingleItemPricedByWeightWithDiscount(),
                 multipleItemsPricedByWeight()
         );
     }
 
     private static Arguments aSingleItemPricedByWeight() {
-        return Arguments.of("a single weighed item", "1.25", Collections.singleton(twoFiftyGramsOfAmericanSweets()));
+        return Arguments.of("a single weighed item", "1.25",
+                Collections.singleton(americanSweetsByWeight(new BigDecimal(".25"), DiscountEnum.NONE)));
+    }
+
+    private static Arguments aSingleItemPricedByWeightWithDiscount() {
+        return Arguments.of("a single weighed item", "3.75",
+                Collections.singleton(
+                        americanSweetsByWeight(new BigDecimal("1.25"), DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE)));
     }
 
     private static Arguments multipleItemsPricedByWeight() {
         return Arguments.of("multiple weighed items", "1.85",
-                Arrays.asList(twoFiftyGramsOfAmericanSweets(), twoHundredGramsOfPickAndMix())
+                Arrays.asList(
+                        americanSweetsByWeight(new BigDecimal(".25"), DiscountEnum.NONE),
+                        twoHundredGramsOfPickAndMix())
         );
     }
 
@@ -57,23 +67,23 @@ class BasketTest {
     }
 
     private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49")).oneOf();
+        return new Product(new BigDecimal("0.49"), DiscountEnum.NONE).oneOf();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55")).oneOf();
+        return new Product(new BigDecimal("1.55"), DiscountEnum.NONE).oneOf();
     }
 
-    private static WeighedProduct aKiloOfAmericanSweets() {
-        return new WeighedProduct(new BigDecimal("4.99"));
+    private static WeighedProduct aKiloOfAmericanSweets(DiscountEnum discountEnum) {
+        return new WeighedProduct(new BigDecimal("4.99"), discountEnum);
     }
 
-    private static Item twoFiftyGramsOfAmericanSweets() {
-        return aKiloOfAmericanSweets().weighing(new BigDecimal(".25"));
+    private static Item americanSweetsByWeight(BigDecimal weight, DiscountEnum discountEnum) {
+        return aKiloOfAmericanSweets(discountEnum).weighing(weight);
     }
 
     private static WeighedProduct aKiloOfPickAndMix() {
-        return new WeighedProduct(new BigDecimal("2.99"));
+        return new WeighedProduct(new BigDecimal("2.99"), DiscountEnum.NONE);
     }
 
     private static Item twoHundredGramsOfPickAndMix() {

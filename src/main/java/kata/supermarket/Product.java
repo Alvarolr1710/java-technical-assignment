@@ -6,8 +6,15 @@ public class Product {
 
     private final BigDecimal pricePerUnit;
 
-    public Product(final BigDecimal pricePerUnit) {
+    private final DiscountEnum discount;
+
+    public Product(final BigDecimal pricePerUnit, final DiscountEnum discount) {
         this.pricePerUnit = pricePerUnit;
+        this.discount = discount;
+    }
+
+    public DiscountEnum getDiscount() {
+        return discount;
     }
 
     BigDecimal pricePerUnit() {
@@ -17,4 +24,6 @@ public class Product {
     public Item oneOf() {
         return new ItemByUnit(this);
     }
+
+
 }
