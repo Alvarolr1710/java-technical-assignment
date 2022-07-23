@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kata.supermarket.WeighedProductTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2022-07-23T12:34:40" hostname="MELSPC" time="0.06">
+  <properties/>
+  <testcase name="[1] 100.00, 1.00, 0, NONE" classname="kata.supermarket.WeighedProductTest" time="0.033"/>
+  <testcase name="[2] 100.00, 1.00, 50.00, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[3] 100.00, 1.00, 0, BUY_ONE_GET_ONE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[4] 100.00, 1.00, 0, BUY_THREE_FOR_TWO" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[5] 100.00, 1.00, 0, BUY_TWO_FOR_POUND_1" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[6] 75.00, 1.50, 37.50, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[7] 175.00, 4.50, 350.00, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.0"/>
+  <testcase name="[8] 120.00, 0.99, 0, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[9] 120.00, 1.99, 60.00, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[10] 111.11, 1.00, 55.55, BUY_ONE_KILO_FOR_HALF_PRICE" classname="kata.supermarket.WeighedProductTest" time="0.0"/>
+  <testcase name="[11] 100.00, 0, 0, NONE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[1] 100.00, 1.00, 100.00, NONE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[2] 100.00, 0.33333, 33.33, NONE" classname="kata.supermarket.WeighedProductTest" time="0.001"/>
+  <testcase name="[3] 100.00, 0.33335, 33.34, NONE" classname="kata.supermarket.WeighedProductTest" time="0.0"/>
+  <testcase name="[4] 100.00, 0, 0.00, NONE" classname="kata.supermarket.WeighedProductTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -46,8 +46,14 @@ class WeighedProductTest {
         return Stream.of(
                 Arguments.of("100.00", "1.00", "0", DiscountEnum.NONE),
                 Arguments.of("100.00", "1.00", "50.00", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
+                Arguments.of("100.00", "1.00", "0", DiscountEnum.BUY_ONE_GET_ONE),
+                Arguments.of("100.00", "1.00", "0", DiscountEnum.BUY_THREE_FOR_TWO),
+                Arguments.of("100.00", "1.00", "0", DiscountEnum.BUY_TWO_FOR_POUND_1),
                 Arguments.of("75.00", "1.50", "37.50", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
                 Arguments.of("175.00", "4.50", "350.00", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
+                Arguments.of("120.00", "0.99", "0", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
+                Arguments.of("120.00", "1.99", "60.00", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
+                Arguments.of("111.11", "1.00", "55.55", DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE),
                 Arguments.of("100.00", "0", "0", DiscountEnum.NONE)
         );
     }
