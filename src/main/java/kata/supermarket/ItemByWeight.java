@@ -19,17 +19,19 @@ public class ItemByWeight implements Item {
         return product.pricePerKilo().multiply(weightInKilos).setScale(2, HALF_UP);
     }
 
+    /* Weighted items are only affected by discounts that takes in consideration weight and not units
+    for our case is only BUY_ONE_KILO_FOR_HALF_PRICE */
     public BigDecimal discountToApply() {
-        DiscountEnum discountEnum = product.getDiscount();
-        BigDecimal discount = BigDecimal.ZERO;
-        if (discountEnum.equals(DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE)) {
-            if (weightInKilos.compareTo(BigDecimal.ONE) >= 0) {
-                discount = product.pricePerKilo()
-                        .multiply(weightInKilos.setScale(0, RoundingMode.DOWN))
-                        .divide(new BigDecimal("2"), RoundingMode.DOWN)
-                        .setScale(2, HALF_UP);
-            }
+
+        if (product.getDiscount().equals(DiscountEnum.BUY_ONE_KILO_FOR_HALF_PRICE) &&
+                weightInKilos.compareTo(BigDecimal.ONE) >= 0) {
+
+            return product.pricePerKilo()
+                    .multiply(weightInKilos.setScale(0, RoundingMode.DOWN))
+                    .divide(new BigDecimal("2"), RoundingMode.DOWN)
+                    .setScale(2, HALF_UP);
         }
-        return discount;
+
+        return BigDecimal.ZERO;
     }
 }
