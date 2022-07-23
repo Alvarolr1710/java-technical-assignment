@@ -15,6 +15,8 @@ public class ItemByUnit implements Item {
         return product.pricePerUnit().multiply(new BigDecimal(product.getUnitCount()));
     }
 
+    /* Unit items are only affected by discounts that takes in consideration the amount of items and not weight
+        for our case is only BUY_ONE_GET_ONE but are others that can be implemented */
     public BigDecimal discountToApply() {
         switch (product.getDiscount()) {
             case BUY_ONE_GET_ONE:

@@ -66,12 +66,12 @@ class BasketTest {
     }
 
     private static Arguments multipleItemOfTheSamePriced() {
-        return Arguments.of("a single item priced per unit", "1.47",
+        return Arguments.of("multiple item priced per unit", "1.47",
                 Collections.singleton(pintsOfMilk(3, DiscountEnum.NONE)));
     }
 
     private static Arguments multipleItemOfTheSamePricedWithDiscount() {
-        return Arguments.of("a single item priced per unit", "0.98",
+        return Arguments.of("multiple item priced per unit", "0.98",
                 Collections.singleton(pintsOfMilk(3, DiscountEnum.BUY_ONE_GET_ONE)));
     }
 
